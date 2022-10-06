@@ -3,9 +3,10 @@ import { HTTPCode } from "../constant/http.constant";
 import logger from "./logger";
 
 type MetaReponseType = {
-  message?: string;
+  success: Boolean;
   code: HTTPCode;
   status: "success" | "error";
+  message?: string;
 };
 
 type JSONResponseType = {
@@ -14,6 +15,32 @@ type JSONResponseType = {
 };
 
 class HttpResponse {
+  private static getStatus(code: String) {
+    code = code.charAt(0);
+
+    let message;
+
+    switch (code) {
+      case "1":
+        message = "Informational";
+        break;
+      case "2":
+        message = "Success";
+        break;
+      case "3":
+        message = "Redirection";
+        break;
+      case "4":
+        message = "Client Error";
+        break;
+      default:
+        message = "Server Error";
+        break;
+    }
+
+    return message;
+  }
+
   private static JSONResponse(
     code: HTTPCode,
     message?: string,
@@ -21,8 +48,9 @@ class HttpResponse {
   ) {
     const payload: JSONResponseType = {
       meta: {
+        success: String(code).charAt(0) !== "2" ? false : true,
         code,
-        status: String(code).charAt(0) !== "2" ? "error" : "success",
+        status: this.getStatus(String(code)),
         message: message,
       },
       data: data,
