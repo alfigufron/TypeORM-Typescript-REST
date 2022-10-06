@@ -9,7 +9,7 @@ import AppDataSource from "./config/data-source";
 import ErrorHandlerMiddlerware from "./middleware/error-handler.middleware";
 import RequestHandlerMiddleware from "./middleware/request-hendler.middleware";
 
-import router from "./routes";
+import apiRouter from "./routes/api";
 
 const app: Express = express();
 const port = env.APP.PORT;
@@ -18,7 +18,7 @@ const startService = () => {
   app.use(express.json());
 
   app.use(RequestHandlerMiddleware);
-  app.use(router());
+  app.use(apiRouter());
   app.use(ErrorHandlerMiddlerware);
 
   AppDataSource.initialize()
