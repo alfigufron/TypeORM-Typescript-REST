@@ -12,7 +12,7 @@ import RequestHandlerMiddleware from "./middleware/request-hendler.middleware";
 import apiRouter from "./routes/api";
 
 const app: Express = express();
-const port = env.APP.PORT;
+const port = env.APP.PORT || 5000;
 
 const startService = () => {
   app.use(express.json());

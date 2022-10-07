@@ -4,7 +4,7 @@ dotenv.config();
 
 const env = {
   APP: {
-    PORT: Number(process.env.APP_PORT || 3000),
+    PORT: Number(process.env.APP_PORT),
   },
   DB: {
     TYPE: process.env.DB_TYPE,
