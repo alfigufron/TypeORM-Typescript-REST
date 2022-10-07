@@ -8,7 +8,7 @@ class UserController {
       const error = true;
 
       if (error)
-        throw new ErrorHandler("Client Error", null, HTTPCode.ClientError);
+        throw new ErrorHandler("Data Not Found", null, HTTPCode.NotFound);
 
       return HttpResponse.success(res, "List User");
     } catch (err) {
